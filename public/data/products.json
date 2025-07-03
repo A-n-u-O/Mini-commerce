@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "slug": "coffee-mug",
+    "name": "Coffee Mug",
+    "price": 2000,
+    "image": "/images/mug.jpg",
+    "description": "A stylish ceramic coffee mug."
+  },
+  {
+    "id": 2,
+    "slug": "notebook",
+    "name": "Notebook",
+    "price": 1500,
+    "image": "/images/notebook.jpg",
+    "description": "A clean notebook for your thoughts."
+  },
+  {
+    "id": "3",
+    "slug": "wireless-headphones",
+    "name": "Premium Wireless Headphones",
+    "price": 199.99,
+    "image": "/images/headphones.jpg",
+    "description": "Noise-cancelling with 30hr battery life"
+  },
+  {
+    "id": "4",
+    "slug": "smart-watch",
+    "name": "Smart Watch Pro",
+    "price": 249.99,
+    "image": "/images/watch.jpg",
+    "description": "Fitness tracking and notifications"
+  }
+]
