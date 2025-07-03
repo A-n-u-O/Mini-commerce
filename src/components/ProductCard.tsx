@@ -1,3 +1,4 @@
+"use client";
 import { Product } from "@/app/lib/types";
 import { useCartStore } from "@/store/cart-store";
 import Image from "next/image";
@@ -10,21 +11,25 @@ export default function ProductCard({ product }: { product: Product }) {
     try {
       // Remove any leading/trailing whitespace from path
       const cleanPath = product.image?.trim();
-      
+
       // Check if it's a valid path (starts with /images/ and has extension)
-      if (cleanPath?.startsWith('/images/') && 
-          ['.jpg', '.jpeg', '.png', '.webp'].some(ext => cleanPath.endsWith(ext))) {
+      if (
+        cleanPath?.startsWith("/images/") &&
+        [".jpg", ".jpeg", ".png", ".webp"].some((ext) =>
+          cleanPath.endsWith(ext)
+        )
+      ) {
         return cleanPath;
       }
-      return '/images/placeholder.jpg';
+      return "/images/placeholder.jpg";
     } catch {
-      return '/images/placeholder.jpg';
+      return "/images/placeholder.jpg";
     }
   };
 
   const imageUrl = getImageUrl();
   return (
-    <div className=" border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className=" border rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:opacity-90 transition-opacity">
       <Link href={`/product/${product.slug}`}>
         <div className=" relative h-48 w-full">
           <Image

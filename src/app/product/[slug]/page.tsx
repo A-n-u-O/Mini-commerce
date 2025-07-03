@@ -1,4 +1,5 @@
 import { getProductBySlug } from "@/app/lib/api";
+import ProductDetail from "@/components/ProductDetail";
 import { notFound } from "next/navigation";
 
 export default async function ProductPage({
@@ -12,7 +13,7 @@ export default async function ProductPage({
   }
   return (
     <main className="container mx-auto px-4 py-8">
-      {/* <ProductDetails product={product} /> */}
+      <ProductDetail product={product} />
     </main>
   );
 }
