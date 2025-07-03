@@ -5,23 +5,44 @@ import Link from "next/link";
 
 export default function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((state) => state.addItem);
+  // Safe image URL handling
+  const getSafeImageUrl = (imgPath: string) => {
+    try {
+      // Check if it's already a valid URL
+      if (imgPath.startsWith('http')) return imgPath;
+      // Ensure local paths start with slash
+      return imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
+    } catch {
+      return '/images/placeholder.jpg';
+    }
+  };
+
+  const imageUrl = getSafeImageUrl(product.image);
   return (
-    <div>
+    <div className=" border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <Link href={`/product/${product.slug}`}>
-        <div className="">
+        <div className=" relative h-48 w-full">
           <Image
-            src={product.name}
+            src={getSafeImageUrl(product.name)}
             alt={product.name}
             fill
             className=" object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
+            }}
           />
         </div>
-        <div className="">
-          <h3>{product.name}</h3>
-          <p>${product.price.toFixed(2)}</p>
+        <div className=" p-4">
+          <h3 className=" font-medium text-lg">{product.name}</h3>
+          <p className=" text-gray-600">${product.price.toFixed(2)}</p>
         </div>
       </Link>
-      <button onClick={() => addItem(product)}>Add to Cart</button>
+      <button
+        onClick={() => addItem(product)}
+        className=" w-full bg-black text-white border-2 rounded-3xl hover:bg-gray-800 transition-colors">
+        Add to Cart
+      </button>
     </div>
   );
 }

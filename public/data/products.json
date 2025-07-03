@@ -16,18 +16,18 @@
     "description": "A clean notebook for your thoughts."
   },
   {
-    "id": "3",
+    "id": 3,
     "slug": "wireless-headphones",
     "name": "Premium Wireless Headphones",
-    "price": 199.99,
+    "price": 19000,
     "image": "/images/headphones.jpg",
     "description": "Noise-cancelling with 30hr battery life"
   },
   {
-    "id": "4",
+    "id": 4,
     "slug": "smart-watch",
     "name": "Smart Watch Pro",
-    "price": 249.99,
+    "price": 249000,
     "image": "/images/watch.jpg",
     "description": "Fitness tracking and notifications"
   }
