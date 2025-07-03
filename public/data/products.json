@@ -30,5 +30,69 @@
     "price": 249000,
     "image": "/images/smart-watch.jpg",
     "description": "Fitness tracking and notifications"
+  },
+  {
+    "id": 5,
+    "slug": "coffee-mug",
+    "name": "Coffee Mug",
+    "price": 2000,
+    "image": "/images/coffee-mug.jpg",
+    "description": "A stylish ceramic coffee mug."
+  },
+  {
+    "id": 6,
+    "slug": "notebook",
+    "name": "Notebook",
+    "price": 1500,
+    "image": "/images/notebook.jpg",
+    "description": "A clean notebook for your thoughts."
+  },
+  {
+    "id": 7,
+    "slug": "wireless-headphones",
+    "name": "Premium Wireless Headphones",
+    "price": 19000,
+    "image": "/images/wireless-headphones.jpg",
+    "description": "Noise-cancelling with 30hr battery life"
+  },
+  {
+    "id": 8,
+    "slug": "smart-watch",
+    "name": "Smart Watch Pro",
+    "price": 249000,
+    "image": "/images/smart-watch.jpg",
+    "description": "Fitness tracking and notifications"
+  },
+  {
+    "id": 9,
+    "slug": "coffee-mug",
+    "name": "Coffee Mug",
+    "price": 2000,
+    "image": "/images/coffee-mug.jpg",
+    "description": "A stylish ceramic coffee mug."
+  },
+  {
+    "id": 10,
+    "slug": "notebook",
+    "name": "Notebook",
+    "price": 1500,
+    "image": "/images/notebook.jpg",
+    "description": "A clean notebook for your thoughts."
+  },
+  {
+    "id": 11,
+    "slug": "wireless-headphones",
+    "name": "Premium Wireless Headphones",
+    "price": 19000,
+    "image": "/images/wireless-headphones.jpg",
+    "description": "Noise-cancelling with 30hr battery life"
+  },
+  {
+    "id": 12,
+    "slug": "smart-watch",
+    "name": "Smart Watch Pro",
+    "price": 249000,
+    "image": "/images/smart-watch.jpg",
+    "description": "Fitness tracking and notifications"
   }
 ]
