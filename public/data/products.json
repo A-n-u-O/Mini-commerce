@@ -4,7 +4,7 @@
     "slug": "coffee-mug",
     "name": "Coffee Mug",
     "price": 2000,
-    "image": "/images/mug.jpg",
+    "image": "/images/coffee-mug.jpg",
     "description": "A stylish ceramic coffee mug."
   },
   {
@@ -20,7 +20,7 @@
     "slug": "wireless-headphones",
     "name": "Premium Wireless Headphones",
     "price": 19000,
-    "image": "/images/headphones.jpg",
+    "image": "/images/wireless-headphones.jpg",
     "description": "Noise-cancelling with 30hr battery life"
   },
   {
@@ -28,7 +28,7 @@
     "slug": "smart-watch",
     "name": "Smart Watch Pro",
     "price": 249000,
-    "image": "/images/watch.jpg",
+    "image": "/images/smart-watch.jpg",
     "description": "Fitness tracking and notifications"
   }
 ]

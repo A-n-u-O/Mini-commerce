@@ -5,28 +5,33 @@ import Link from "next/link";
 
 export default function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((state) => state.addItem);
-  // Safe image URL handling
-  const getSafeImageUrl = (imgPath: string) => {
+  // Verify image exists or use placeholder
+  const getImageUrl = () => {
     try {
-      // Check if it's already a valid URL
-      if (imgPath.startsWith('http')) return imgPath;
-      // Ensure local paths start with slash
-      return imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
+      // Remove any leading/trailing whitespace from path
+      const cleanPath = product.image?.trim();
+      
+      // Check if it's a valid path (starts with /images/ and has extension)
+      if (cleanPath?.startsWith('/images/') && 
+          ['.jpg', '.jpeg', '.png', '.webp'].some(ext => cleanPath.endsWith(ext))) {
+        return cleanPath;
+      }
+      return '/images/placeholder.jpg';
     } catch {
       return '/images/placeholder.jpg';
     }
   };
 
-  const imageUrl = getSafeImageUrl(product.image);
+  const imageUrl = getImageUrl();
   return (
     <div className=" border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <Link href={`/product/${product.slug}`}>
         <div className=" relative h-48 w-full">
           <Image
-            src={getSafeImageUrl(product.name)}
+            src={imageUrl}
             alt={product.name}
             fill
-            className=" object-cover"
+            className=" object-contain"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
