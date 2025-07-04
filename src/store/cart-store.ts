@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-type CartItem = {
+export type CartItem = {
   id: number;
   name: string;
   price: number;
   image: string;
   quantity: number;
+  slug: string;
 };
 
 type CartState = {
@@ -21,7 +22,7 @@ export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       items: [],
-      
+
       addItem: (product) =>
         set((state) => {
           const existingItem = state.items.find(

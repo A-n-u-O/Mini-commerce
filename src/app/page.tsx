@@ -16,10 +16,13 @@ export default async function Home() {
     queryFn: fetchProducts,
   });
   return (
-    <main className=" container mx-auto px-4 py-8">
-      <h1 className=" text-3xl font-bold">Mini-Commerce</h1>
+    <main className="mx-auto px-4 py-8">
+      
+
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <ProductGrid />
+        <div className=" m-10">
+          <ProductGrid />
+        </div>
       </HydrationBoundary>
     </main>
   );

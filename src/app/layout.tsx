@@ -26,9 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-       <Providers>{children}</Providers> 
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          <div className=" flex flex-row justify-between bg-black w-full p-4 text-white">
+            <h1 className=" text-3xl font-bold">Mini-Commerce</h1>
+            <button>Cart</button>
+          </div>
+          {children}
+        </Providers>
       </body>
     </html>
   );
