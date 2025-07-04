@@ -32,53 +32,53 @@
     "description": "Fitness tracking and notifications"
   },
   {
-    "id": 5,
-    "slug": "coffee-mug",
-    "name": "Coffee Mug",
-    "price": 2000,
-    "image": "/images/coffee-mug.jpg",
-    "description": "A stylish ceramic coffee mug."
-  },
+  "id": 5,
+  "slug": "ceramic-dinner-set",
+  "name": "Ceramic Dinner Set (16pc)",
+  "price": 4500,
+  "image": "/images/dinner-set.jpg",
+  "description": "Elegant ceramic dinnerware set for 4"
+},
   {
-    "id": 6,
-    "slug": "notebook",
-    "name": "Notebook",
-    "price": 1500,
-    "image": "/images/notebook.jpg",
-    "description": "A clean notebook for your thoughts."
-  },
+  "id": 6,
+  "slug": "bluetooth-speaker",
+  "name": "Portable Bluetooth Speaker",
+  "price": 3500,
+  "image": "/images/bluetooth-speaker.jpg",
+  "description": "Waterproof with 12hr playtime"
+},
   {
-    "id": 7,
-    "slug": "wireless-headphones",
-    "name": "Premium Wireless Headphones",
-    "price": 19000,
-    "image": "/images/wireless-headphones.jpg",
-    "description": "Noise-cancelling with 30hr battery life"
-  },
+  "id": 7,
+  "slug": "ergonomic-keyboard",
+  "name": "Ergonomic Keyboard",
+  "price": 6500,
+  "image": "/images/ergo-keyboard.jpg",
+  "description": "Wrist-friendly mechanical keyboard"
+},
   {
-    "id": 8,
-    "slug": "smart-watch",
-    "name": "Smart Watch Pro",
-    "price": 249000,
-    "image": "/images/smart-watch.jpg",
-    "description": "Fitness tracking and notifications"
-  },
+  "id": 8,
+  "slug": "premium-leather-wallet",
+  "name": "Genuine Leather Wallet",
+  "price": 2800,
+  "image": "/images/leather-wallet.jpg",
+  "description": "Handcrafted full-grain leather"
+},
   {
-    "id": 9,
-    "slug": "coffee-mug",
-    "name": "Coffee Mug",
-    "price": 2000,
-    "image": "/images/coffee-mug.jpg",
-    "description": "A stylish ceramic coffee mug."
-  },
+  "id": 9,
+  "slug": "yoga-mat",
+  "name": "Non-Slip Yoga Mat",
+  "price": 2200,
+  "image": "/images/yoga-mat.jpg",
+  "description": "Eco-friendly 6mm thick mat"
+},
   {
-    "id": 10,
-    "slug": "notebook",
-    "name": "Notebook",
-    "price": 1500,
-    "image": "/images/notebook.jpg",
-    "description": "A clean notebook for your thoughts."
-  },
+  "id": 10,
+  "slug": "thermal-travel-mug",
+  "name": "Insulated Travel Mug",
+  "price": 1800,
+  "image": "/images/travel-mug.jpg",
+  "description": "Keeps drinks hot for 8 hours"
+},
   {
     "id": 11,
     "slug": "wireless-headphones",

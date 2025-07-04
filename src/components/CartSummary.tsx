@@ -16,11 +16,7 @@ export default function CartSummary({ items }: CartSummaryProps) {
   const tax = subtotal * 0.1;
   const total = subtotal + shipping + tax;
 
-  const route = useRouter();
-  const makePayment = () => {
-    // route("/payment");
-  };
-
+  
   return (
     <div className="rounded-lg border p-6">
       <h2 className="text-lg font-semibold mb-4">Order Summary</h2>

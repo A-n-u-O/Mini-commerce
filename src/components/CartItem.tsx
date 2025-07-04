@@ -51,7 +51,7 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
       </div>
       
       <Button
-      asChild='false'
+      asChild
         variant="ghost"
         size="icon"
         onClick={onRemove}
