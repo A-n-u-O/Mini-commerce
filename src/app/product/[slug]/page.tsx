@@ -2,6 +2,7 @@ import { getProductBySlug } from "@/app/lib/api";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   loading: () => (
@@ -31,19 +32,75 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   ),
 });
 
-export default async function ProductPage({
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: PageProps): Promise<Metadata> {
+  const product = await getProductBySlug(params.slug);
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+      description: "The requested product does not exist",
+    };
+  }
+
+  return {
+    title: `${product.name} | Mini-Commerce`,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: [
+        {
+          url: product.image,
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
+    },
+  };
+}
+
+export default async function ProductPage({ params }: PageProps) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
     notFound();
   }
 
+  // Add structured data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.image,
+    description: product.description,
+    brand: {
+      "@type": "Brand",
+      name: "Mini-Commerce",
+    },
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "USD",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
+      {/* Structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
