@@ -10,8 +10,6 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         {/* Image Skeleton */}
         <div className="aspect-square bg-gray-200 rounded-2xl animate-pulse"></div>
-        
-        {/* Content Skeleton */}
         <div className="space-y-6">
           <div className="space-y-4">
             <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
@@ -21,7 +19,6 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
               <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
             </div>
           </div>
-          
           <div className="flex gap-4">
             <div className="flex-1 h-12 bg-gray-200 rounded-xl animate-pulse"></div>
             <div className="flex-1 h-12 bg-gray-200 rounded-xl animate-pulse"></div>
@@ -32,16 +29,9 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   ),
 });
 
-type Props = {
-  params: { slug: string }
-  searchParams?: Record<string, string | string[] | undefined>
-}
-
-export async function generateMetadata({ 
-  params 
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
@@ -66,14 +56,18 @@ export async function generateMetadata({
         },
       ],
     },
+    alternates: {
+      canonical: `/product/${params.slug}`,
+    },
   };
 }
 
-export default async function Page({ 
-  params 
-}: {
-  params: { slug: string }
-}) {
+type Props = {
+  params: { slug: string };
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default async function Page({ params }: Props) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
@@ -94,11 +88,12 @@ export default async function Page({
       "@type": "Offer",
       price: product.price,
       priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
     },
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -126,6 +121,6 @@ export default async function Page({
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <ProductDetail product={product} />
       </div>
-    </main>
+    </>
   );
 }
