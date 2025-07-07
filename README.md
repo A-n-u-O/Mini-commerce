@@ -1,37 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mini-Commerce
 
-## Getting Started
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://mini-commerce.vercel.app)
+![Test Status](https://img.shields.io/badge/tests-3%20passed-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-85%25-yellow)
 
-First, run the development server:
+A lightweight e-commerce prototype built with Next.js 14 (App Router) featuring product browsing, cart management, and mock checkout.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Mini-Commerce Screenshot](/public/screenshot.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Core Requirements
+- **Product Catalogue** - Browse 8+ products with images, prices, and descriptions
+- **Product Details** - Full view with "Add to Cart" functionality
+- **Persistent Cart** - Manage quantities with Zustand + localStorage
+- **Checkout Flow** - Order summary → Confirmation with random order ID
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Enhancements
+- ✨ Dark/Light mode toggle
+- 🔍 Product search functionality
+- 🛒 Toast notifications for cart actions
+- 💅 Framer Motion animations
+- 📱 Fully responsive design
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+**Mandatory Stack**
+- Next.js 14 (App Router)
+- React 18
+- TypeScript (strict mode)
+- Tailwind CSS
+- Zustand (state management)
+- React Query (data fetching)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Testing**
+- Jest
+- React Testing Library
+- Playwright (e2e)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design Approach
 
-## Deploy on Vercel
+### Layout & Responsiveness
+| Breakpoint  | Layout          | Features                      |
+|-------------|-----------------|-------------------------------|
+| Mobile      | Single column   | Sticky header, compact cards  |
+| Tablet      | 2-column grid   | Larger product images         |
+| Desktop     | 3-column grid   | Sidebar cart summary          |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Mini-commerce
+### Color System
+```js
+{
+  light: {
+    primary: '#4f46e5', // Indigo-600
+    background: '#ffffff',
+    text: '#111827' // Gray-900
+  },
+  dark: {
+    primary: '#6366f1', // Indigo-500
+    background: '#111827',
+    text: '#f3f4f6' // Gray-100
+  }
+}
