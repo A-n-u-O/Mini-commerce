@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     template: "%s | Mini-Commerce"
   },
   description: "A lightweight e-commerce demo built with Next.js 14",
-  metadataBase: new URL(''), 
+  // metadataBase: new URL(''), 
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: "Mini-Commerce",
     description: "Browse products and manage your cart in this demo store",
-    url: "", 
+    // url: "", 
     siteName: "Mini-Commerce",
     images: [
       {
