@@ -28,18 +28,22 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   ),
 });
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  const product = await getProductBySlug(params.slug);
-
+// For generateMetadata - params is now a Promise
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  
   if (!product) {
     return {
       title: "Product Not Found",
       description: "The requested product does not exist",
     };
   }
-
+  
   return {
     title: `${product.name} | Mini-Commerce`,
     description: product.description,
@@ -55,24 +59,22 @@ export async function generateMetadata(
         },
       ],
     },
-    alternates: {
-      canonical: `/product/${params.slug}`,
-    },
   };
 }
 
-type Props = {
-  params: { slug: string };
-  searchParams?: Record<string, string | string[] | undefined>;
-};
-
-export default async function Page({ params }: Props) {
-  const product = await getProductBySlug(params.slug);
-
+// Page component - params is now a Promise
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  
   if (!product) {
     notFound();
   }
-
+  
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -87,17 +89,15 @@ export default async function Page({ params }: Props) {
       "@type": "Offer",
       price: product.price,
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
     },
   };
-
+  
   return (
-    <>
+    <main className="min-h-screen bg-gray-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
@@ -116,10 +116,9 @@ export default async function Page({ params }: Props) {
           </nav>
         </div>
       </div>
-
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <ProductDetail product={product} />
       </div>
-    </>
+    </main>
   );
 }
