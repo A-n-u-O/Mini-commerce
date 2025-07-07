@@ -1,4 +1,3 @@
-// src/components/__tests__/AddToCart.test.tsx
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import AddToCart from '../AddToCart';

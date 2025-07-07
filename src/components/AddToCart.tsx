@@ -1,4 +1,3 @@
-// src/components/AddToCart.tsx
 'use client';
 import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cart-store';

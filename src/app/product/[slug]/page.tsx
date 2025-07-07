@@ -8,7 +8,6 @@ const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   loading: () => (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-        {/* Image Skeleton */}
         <div className="aspect-square bg-gray-200 rounded-2xl animate-pulse"></div>
         <div className="space-y-6">
           <div className="space-y-4">
