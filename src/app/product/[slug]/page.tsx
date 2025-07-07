@@ -1,7 +1,6 @@
 import { getProductBySlug } from "@/app/lib/api";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import { Loader2 } from "lucide-react";
 
 const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   loading: () => (
