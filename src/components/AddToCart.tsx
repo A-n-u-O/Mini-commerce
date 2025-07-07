@@ -1,6 +1,6 @@
 // src/components/AddToCart.tsx
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cart-store';
 import { Product } from '@/app/lib/types';
 
@@ -12,18 +12,27 @@ export default function AddToCart({ product }: AddToCartProps) {
   const [isAdded, setIsAdded] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
 
-  const handleAddToCart = () => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      slug: product.slug
-    });
-    setIsAdded(true);
-    
-    const timer = setTimeout(() => setIsAdded(false), 3000);
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isAdded) {
+      timer = setTimeout(() => setIsAdded(false), 3000);
+    }
     return () => clearTimeout(timer);
+  }, [isAdded]);
+
+  const handleAddToCart = () => {
+    try {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        slug: product.slug
+      });
+      setIsAdded(true);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
   return (
@@ -37,7 +46,10 @@ export default function AddToCart({ product }: AddToCartProps) {
         Add to Cart
       </button>
       {isAdded && (
-        <p className="mt-2 text-green-600 animate-fade-in" data-testid="success-message">
+        <p 
+          className="mt-2 text-green-600 animate-fade-in" 
+          data-testid="success-message"
+        >
           Added to cart!
         </p>
       )}
