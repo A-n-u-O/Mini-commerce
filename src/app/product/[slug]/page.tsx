@@ -1,5 +1,6 @@
 import { getProductBySlug } from "@/app/lib/api";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
@@ -46,14 +47,14 @@ export default async function ProductPage({
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
-          <nav className="flex items-center space-x-2 text-sm">
-            <a href="/" className="text-gray-500 hover:text-gray-700">
+          <nav className="flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+            <Link href="/" className="text-gray-500 hover:text-gray-700">
               Home
-            </a>
+            </Link>
             <span className="text-gray-400">/</span>
-            <a href="/products" className="text-gray-500 hover:text-gray-700">
+            <Link href="/products" className="text-gray-500 hover:text-gray-700">
               Products
-            </a>
+            </Link>
             <span className="text-gray-400">/</span>
             <span className="text-gray-900 font-medium truncate">
               {product.name}

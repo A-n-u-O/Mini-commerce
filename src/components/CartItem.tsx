@@ -2,7 +2,6 @@
 import { CartItem as CartItemType } from '@/store/cart-store';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Input } from './ui/input';
 import { Button } from './ui/button';
 
 interface CartItemProps {

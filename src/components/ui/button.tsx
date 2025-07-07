@@ -45,26 +45,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (asChild && React.isValidElement(children)) {
       // Create a type for the child props we expect to merge
-      type ChildProps = {
+      type ChildProps<T extends React.ElementType = any> = {
         className?: string;
         ref?: React.Ref<unknown>;
-      } & React.ComponentPropsWithoutRef<any>;
-
+      } & React.ComponentPropsWithoutRef<T>;
       const child = children as React.ReactElement<ChildProps>;
-      
+
       return React.cloneElement(child, {
-        className: `${child.props.className || ''} ${buttonClass}`,
+        className: `${child.props.className || ""} ${buttonClass}`,
         ...props,
-        ...(typeof child.type !== 'string' && { ref }),
+        ...(typeof child.type !== "string" && { ref }),
       } as ChildProps);
     }
 
     return (
-      <button
-        ref={ref}
-        className={buttonClass}
-        {...props}
-      >
+      <button ref={ref} className={buttonClass} {...props}>
         {children}
       </button>
     );
