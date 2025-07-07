@@ -56,7 +56,7 @@ export default function SuccessPage() {
 
             {/* What's Next */}
             <div className="bg-blue-50 rounded-lg p-6 mb-8">
-              <h3 className="text-lg font-semibold text-blue-900 mb-3">What's next?</h3>
+              <h3 className="text-lg font-semibold text-blue-900 mb-3">What&apos;s next?</h3>
               <div className="space-y-3 text-left">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">
@@ -64,7 +64,7 @@ export default function SuccessPage() {
                   </div>
                   <div>
                     <p className="font-medium text-blue-900">Order Confirmation</p>
-                    <p className="text-sm text-blue-700">You'll receive an email confirmation shortly</p>
+                    <p className="text-sm text-blue-700">You&apos;ll receive an email confirmation shortly</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -73,7 +73,7 @@ export default function SuccessPage() {
                   </div>
                   <div>
                     <p className="font-medium text-blue-900">Processing</p>
-                    <p className="text-sm text-blue-700">We'll prepare your order for shipment</p>
+                    <p className="text-sm text-blue-700">We&apos;ll prepare your order for shipment</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -82,7 +82,7 @@ export default function SuccessPage() {
                   </div>
                   <div>
                     <p className="font-medium text-blue-900">Shipping</p>
-                    <p className="text-sm text-blue-700">Track your order with the tracking number we'll send</p>
+                    <p className="text-sm text-blue-700">Track your order with the tracking number we&apos;ll send</p>
                   </div>
                 </div>
               </div>
@@ -127,7 +127,7 @@ export default function SuccessPage() {
                   Shipping Info
                 </h4>
                 <p className="text-sm text-gray-600">
-                  Standard shipping typically takes 3-5 business days. You'll receive tracking information once your order ships.
+                  Standard shipping typically takes 3-5 business days. You&apos;ll receive tracking information once your order ships.
                 </p>
               </div>
               <div>
