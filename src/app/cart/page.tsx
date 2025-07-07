@@ -45,7 +45,7 @@ export default function CartPage() {
         </div>
         <div className="md:col-span-1">
           <CartSummary items={items} />
-          <Button asChild className="w-full mt-4 text-xl bg-blue-600 hover:bg-blue-700">
+          <Button asChild className="w-full mt-12 text-xl p-4 bg-blue-600 hover:bg-blue-700">
             <Link href="/checkout">Proceed to Checkout</Link>
           </Button>
         </div>

@@ -3,17 +3,18 @@ import { Product } from "@/app/lib/types";
 import { useCartStore } from "@/store/cart-store";
 import Image from "next/image";
 import Link from "next/link";
+import { ShoppingCart, Heart, Eye } from "lucide-react";
+import { useState } from "react";
 
 export default function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((state) => state.addItem);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-  // Verify image exists or use placeholder
   const getImageUrl = () => {
     try {
-      // Remove any leading/trailing whitespace from path
       const cleanPath = product.image?.trim();
-
-      // Check if it's a valid path (starts with /images/ and has extension)
       if (
         cleanPath?.startsWith("/images/") &&
         [".jpg", ".jpeg", ".png", ".webp"].some((ext) =>
@@ -28,44 +29,103 @@ export default function ProductCard({ product }: { product: Product }) {
     }
   };
 
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setIsAddingToCart(true);
+    
+    // Simulate async operation for better UX
+    setTimeout(() => {
+      addItem(product);
+      setIsAddingToCart(false);
+    }, 300);
+  };
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
   const imageUrl = getImageUrl();
 
   return (
-    <div className="group flex flex-col h-full w-full max-w-[580px] border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-white mx-auto">
-      <Link href={`/product/${product.slug}`} className="flex flex-col flex-grow">
+    <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200">
+      {/* Wishlist Button */}
+      <button
+        onClick={handleLike}
+        className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 flex items-center justify-center transition-all duration-200 hover:bg-white hover:scale-110"
+      >
+        <Heart 
+          className={`h-5 w-5 transition-colors ${
+            isLiked ? "text-red-500 fill-red-500" : "text-gray-400"
+          }`} 
+        />
+      </button>
+
+      <Link href={`/product/${product.slug}`} className="block">
         {/* Image Container */}
-        <div className="relative h-[400px] w-full bg-gray-100">
+        <div className="relative aspect-square bg-gray-50 overflow-hidden">
+          {isImageLoading && (
+            <div className="absolute inset-0 bg-gray-100 animate-pulse flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+            </div>
+          )}
+          
           <Image
             src={imageUrl}
             alt={product.name}
             fill
-            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority={false}
+            className={`object-cover transition-all duration-500 group-hover:scale-105 ${
+              isImageLoading ? "opacity-0" : "opacity-100"
+            }`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            onLoad={() => setIsImageLoading(false)}
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
+              setIsImageLoading(false);
             }}
           />
+          
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div className="bg-white rounded-full p-3 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+              <Eye className="h-5 w-5 text-gray-800" />
+            </div>
+          </div>
         </div>
 
-        {/* Content Container */}
-        <div className="p-4 flex flex-col gap-1">
-          <h3 className="text-4xl font-semibold text-gray-900 line-clamp-2">
+        {/* Content */}
+        <div className="p-4">
+          <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 text-sm leading-tight">
             {product.name}
           </h3>
-          <p className="text-2xl font-bold text-gray-800">
+          <p className="text-lg font-bold text-gray-900 mb-3">
             ${product.price.toFixed(2)}
           </p>
         </div>
       </Link>
 
-      {/* Add to Cart */}
+      {/* Add to Cart Button */}
       <div className="px-4 pb-4">
         <button
-          onClick={() => addItem(product)}
-          className="w-full py-4 text-3xl font-medium bg-black text-white hover:bg-gray-900 rounded-lg transition-all duration-150 active:scale-95"
+          onClick={handleAddToCart}
+          disabled={isAddingToCart}
+          className={`w-full py-3 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+            isAddingToCart
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-black text-white hover:bg-gray-800 active:scale-95"
+          }`}
         >
-          Add to Cart
+          {isAddingToCart ? (
+            <div className="w-4 h-4 border-2 border-gray-400 border-t-gray-600 rounded-full animate-spin"></div>
+          ) : (
+            <>
+              <ShoppingCart className="h-4 w-4" />
+              Add to Cart
+            </>
+          )}
         </button>
       </div>
     </div>

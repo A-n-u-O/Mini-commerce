@@ -27,10 +27,10 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
       </Link>
       
       <div className="flex-1">
-        <Link href={`/product/${item.slug}`} className="font-medium hover:underline">
+        <Link href={`/product/${item.slug}`} className="font-medium hover:underline text-3xl">
           {item.name}
         </Link>
-        <p className="text-sm text-muted-foreground">${item.price.toFixed(2)}</p>
+        <p className="text-2xl text-muted-foreground">${item.price.toFixed(2)}</p>
       </div>
       
       <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
         />
       </div>
       
-      <div className="w-20 text-right font-medium">
+      <div className="w-20 text-2xl text-right font-medium">
         ${(item.price * item.quantity).toFixed(2)}
       </div>
       

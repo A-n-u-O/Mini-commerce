@@ -5,6 +5,11 @@
     "name": "Coffee Mug",
     "price": 2000,
     "image": "/images/coffee-mug.jpg",
+    "images": [
+      "/images/coffee-mug-1.jpg",
+      "/images/coffee-mug-2.jpg",
+      "/images/coffee-mug-3.jpg"
+    ],
     "description": "A stylish ceramic coffee mug."
   },
   {
@@ -13,6 +18,10 @@
     "name": "Notebook",
     "price": 1500,
     "image": "/images/notebook.jpg",
+    "images": [
+      "/images/notebook-1.jpg",
+      "/images/notebook-2.jpg"
+    ],
     "description": "A clean notebook for your thoughts."
   },
   {
@@ -21,6 +30,12 @@
     "name": "Premium Wireless Headphones",
     "price": 19000,
     "image": "/images/wireless-headphones.jpg",
+    "images": [
+      "/images/wireless-headphones-1.jpg",
+      "/images/wireless-headphones-2.jpg",
+      "/images/wireless-headphones-3.jpg",
+      "/images/wireless-headphones-4.jpg"
+    ],
     "description": "Noise-cancelling with 30hr battery life"
   },
   {
@@ -29,6 +44,11 @@
     "name": "Smart Watch Pro",
     "price": 249000,
     "image": "/images/smart-watch.jpg",
+    "images": [
+      "/images/smart-watch-1.jpg",
+      "/images/smart-watch-2.jpg",
+      "/images/smart-watch-3.jpg"
+    ],
     "description": "Fitness tracking and notifications"
   },
   {
@@ -37,6 +57,10 @@
   "name": "Ceramic Dinner Set (16pc)",
   "price": 4500,
   "image": "/images/dinner-set.jpg",
+  "images": [
+      "/images/dinner-set-1.jpg",
+      "/images/dinner-set-2.jpg"
+    ],
   "description": "Elegant ceramic dinnerware set for 4"
 },
   {
@@ -45,6 +69,11 @@
   "name": "Portable Bluetooth Speaker",
   "price": 3500,
   "image": "/images/bluetooth-speaker.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
   "description": "Waterproof with 12hr playtime"
 },
   {
@@ -53,6 +82,10 @@
   "name": "Ergonomic Keyboard",
   "price": 6500,
   "image": "/images/ergo-keyboard.jpg",
+  "images": [
+      "/images/ergo-keyboard-1.jpg",
+      "/images/ergo-keyboard-2.jpg"
+    ],
   "description": "Wrist-friendly mechanical keyboard"
 },
   {
@@ -61,6 +94,11 @@
   "name": "Genuine Leather Wallet",
   "price": 2800,
   "image": "/images/leather-wallet.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
   "description": "Handcrafted full-grain leather"
 },
   {
@@ -69,6 +107,11 @@
   "name": "Non-Slip Yoga Mat",
   "price": 2200,
   "image": "/images/yoga-mat.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
   "description": "Eco-friendly 6mm thick mat"
 },
   {
@@ -77,22 +120,52 @@
   "name": "Insulated Travel Mug",
   "price": 1800,
   "image": "/images/travel-mug.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
   "description": "Keeps drinks hot for 8 hours"
 },
   {
-    "id": 11,
-    "slug": "wireless-headphones",
-    "name": "Premium Wireless Headphones",
-    "price": 19000,
-    "image": "/images/wireless-headphones.jpg",
-    "description": "Noise-cancelling with 30hr battery life"
-  },
+  "id": 11,
+  "slug": "air-fryer-xl",
+  "name": "Digital Air Fryer (5L)",
+  "price": 8900,
+  "image": "/images/air-fryer.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
+  "description": "8-in-1 cooking functions with touch controls",
+  "category": "kitchen"
+},
   {
-    "id": 12,
-    "slug": "smart-watch",
-    "name": "Smart Watch Pro",
-    "price": 249000,
-    "image": "/images/smart-watch.jpg",
-    "description": "Fitness tracking and notifications"
-  }
+  "id": 12,
+  "slug": "noise-cancelling-earbuds",
+  "name": "True Wireless Earbuds Pro",
+  "price": 12900,
+  "image": "/images/wireless-earbuds.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
+  "description": "Active noise cancellation with 24hr battery",
+  "category": "electronics"
+},{
+  "id": 13,
+  "slug": "adjustable-laptop-stand",
+  "name": "Ergonomic Laptop Stand",
+  "price": 3500,
+  "image": "/images/laptop-stand.jpg",
+  "images": [
+      "/images/bluetooth-speaker-1.jpg",
+      "/images/bluetooth-speaker-2.jpg",
+      "/images/bluetooth-speaker-3.jpg"
+    ],
+  "description": "Aluminum stand with 6 height adjustments",
+  "category": "office"
+}
 ]
