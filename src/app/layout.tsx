@@ -71,7 +71,7 @@ export default function RootLayout({
           <main className="pt-20 min-h-screen container mx-auto px-4 sm:px-6 lg:px-8">
             {children}
           </main>
-          {/* Consider adding a footer here */}
+          {/* footer  */}
         </Providers>
       </body>
     </html>
