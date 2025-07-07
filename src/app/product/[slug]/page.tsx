@@ -37,14 +37,18 @@ type Props = {
   searchParams?: Record<string, string | string[] | undefined>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await getProductBySlug(params.slug)
-  
+export async function generateMetadata({ 
+  params 
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  const product = await getProductBySlug(params.slug);
+
   if (!product) {
     return {
-      title: 'Product Not Found',
-      description: 'The requested product does not exist',
-    }
+      title: "Product Not Found",
+      description: "The requested product does not exist",
+    };
   }
 
   return {
@@ -53,24 +57,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: product.name,
       description: product.description,
-      images: [{
-        url: product.image,
-        width: 800,
-        height: 600,
-        alt: product.name,
-      }],
+      images: [
+        {
+          url: product.image,
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
     },
-    alternates: {
-      canonical: `/product/${params.slug}`,
-    }
-  }
+  };
 }
 
-export default async function Page({ params }: Props) {
-  const product = await getProductBySlug(params.slug)
-  
+export default async function Page({ 
+  params 
+}: {
+  params: { slug: string }
+}) {
+  const product = await getProductBySlug(params.slug);
+
   if (!product) {
-    notFound()
+    notFound();
   }
 
   const jsonLd = {
@@ -87,12 +94,11 @@ export default async function Page({ params }: Props) {
       "@type": "Offer",
       price: product.price,
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
     },
-  }
+  };
 
   return (
-    <>
+    <main className="min-h-screen bg-gray-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -120,6 +126,6 @@ export default async function Page({ params }: Props) {
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <ProductDetail product={product} />
       </div>
-    </>
+    </main>
   );
 }
