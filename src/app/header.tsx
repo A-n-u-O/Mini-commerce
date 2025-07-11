@@ -9,6 +9,19 @@ export default function Header() {
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const headerHeight = 64; // Your header height in pixels
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: elementPosition - headerHeight,
+      behavior: 'smooth'
+    });
+  }
+  setIsMenuOpen(false);
+};
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
@@ -16,6 +29,10 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
           >
             Mini-Commerce
@@ -23,24 +40,18 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/products"
+            <button
+              onClick={() => scrollToSection('featured-products')}
               className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
             >
               Products
-            </Link>
-            <Link
-              href="/categories"
-              className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-            >
-              Categories
-            </Link>
-            <Link
-              href="/about"
+            </button>
+            <button
+              onClick={() => scrollToSection('features')}
               className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
             >
               About
-            </Link>
+            </button>
           </nav>
 
           {/* Right Side Actions */}
@@ -90,27 +101,18 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <nav className="flex flex-col space-y-4">
-              <Link
-                href="/products"
-                className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection('featured-products')}
+                className="text-gray-700 hover:text-gray-900 transition-colors font-medium text-left"
               >
                 Products
-              </Link>
-              <Link
-                href="/categories"
-                className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Categories
-              </Link>
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => scrollToSection('features')}
+                className="text-gray-700 hover:text-gray-900 transition-colors font-medium text-left"
               >
                 About
-              </Link>
+              </button>
               <Link
                 href="/account"
                 className="text-gray-700 hover:text-gray-900 transition-colors font-medium sm:hidden"
