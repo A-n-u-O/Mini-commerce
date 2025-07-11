@@ -1,4 +1,3 @@
-// components/SearchModal.tsx
 'use client'
 
 import { Search, X } from "lucide-react";
@@ -6,21 +5,23 @@ import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProductsClient } from "@/app/lib/api";
 import ProductCard from "./ProductCard";
+import { Product } from "@/app/lib/types";
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { data: products } = useQuery({
+  const { data } = useQuery({
     queryKey: ["products"],
-    queryFn: fetchProductsClient,
+    queryFn: () => fetchProductsClient(),
   });
 
-  const filteredProducts = products?.filter((product) =>
+  const products = data?.products || [];
+  const filteredProducts = products.filter((product: Product) =>
     product.name.toLowerCase().includes(query.toLowerCase()) ||
-    product.description.toLowerCase().includes(query.toLowerCase())
-  ) || [];
+    product.description?.toLowerCase().includes(query.toLowerCase())
+  );
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -103,13 +104,13 @@ export default function SearchModal() {
                     Start typing to search products
                   </p>
                   <p className="text-sm text-gray-400">
-                    Try "coffee", "notebook", or "headphones"
+                    Try &quot;coffee&quot;, &quot;notebook&quot;, or &quot;headphones&quot;
                   </p>
                 </div>
               ) : filteredProducts.length === 0 ? (
                 <div className="text-center py-8">
                   <p className="text-gray-500 mb-2">
-                    No products found for "{query}"
+                    No products found for &quot;{query}&quot;
                   </p>
                   <p className="text-sm text-gray-400">
                     Try different keywords
@@ -117,7 +118,7 @@ export default function SearchModal() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filteredProducts.map((product) => (
+                  {filteredProducts.map((product: Product) => (
                     <div 
                       key={product.id}
                       onClick={() => setIsOpen(false)}

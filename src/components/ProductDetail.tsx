@@ -49,14 +49,12 @@ export default function ProductDetail({ product }: { product: Product }) {
   };
 
   const handleAddToCart = async () => {
-    setIsAddingToCart(true);
-    for (let i = 0; i < quantity; i++) {
-      addItem(product);
-    }
-    setTimeout(() => {
-      setIsAddingToCart(false);
-    }, 500);
-  };
+  setIsAddingToCart(true);
+  addItem(product, quantity); 
+  setTimeout(() => {
+    setIsAddingToCart(false);
+  }, 500);
+};
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -161,21 +159,21 @@ export default function ProductDetail({ product }: { product: Product }) {
 
         {/* Product Info */}
         <div className="space-y-6">
-          // Update the stock display in ProductDetail
           <div className="flex items-center gap-4">
             <p className="text-3xl font-bold text-gray-900">
               ${formattedPrice}
             </p>
             <span
               className={`px-3 py-1 text-sm font-medium rounded-full ${
-                (product.stock ?? 0) > 0 // Fallback to 0 if stock is undefined
+                // Fallback to 0 if stock is undefined
+                (product.stock ?? 0) > 0
                   ? "bg-green-100 text-green-800"
                   : "bg-red-100 text-red-800"
               }`}>
               {(product.stock ?? 0) > 0 ? "In Stock" : "Out of Stock"}
             </span>
           </div>
-          // Update rating display to handle undefined rating
+          {/* Update rating display to handle undefined rating */}
           <div className="flex items-center gap-2">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
@@ -194,7 +192,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               {/* Fallback to 0 if reviews is undefined */}
             </span>
           </div>
-          // Add color and size options if they exist
+          {/* Add color and size options if they exist */}
           {product.colorOptions && product.colorOptions.length > 1 && (
             <div className="space-y-2">
               <span className="text-sm font-medium text-gray-700">Colors:</span>
@@ -231,6 +229,28 @@ export default function ProductDetail({ product }: { product: Product }) {
               </div>
             </div>
           )}
+          {/* Quantity Selector */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-4">
+              <span className="text-sm font-medium text-gray-700">
+                Quantity:
+              </span>
+              <div className="flex items-center border border-gray-300 rounded-lg">
+                <button
+                  onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                  className="p-2 hover:bg-gray-100 transition-colors"
+                  disabled={quantity <= 1}>
+                  <Minus className="h-4 w-4" />
+                </button>
+                <span className="px-4 py-2 font-medium">{quantity}</span>
+                <button
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                  className="p-2 hover:bg-gray-100 transition-colors">
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
           {/* Action Buttons */}
           <div className="space-y-3">
             <button
@@ -246,7 +266,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               ) : (
                 <>
                   <ShoppingCart className="h-5 w-5" />
-                  Add {quantity} to Cart
+                  Add {quantity} {quantity > 1 ? "items" : "item"} to Cart
                 </>
               )}
             </button>

@@ -6,7 +6,11 @@ import Link from "next/link";
 import { ShoppingCart, Heart, Eye, Star } from "lucide-react";
 import { useState } from "react";
 
-export default function ProductCard({ product }: { product: Product }) {
+interface ProductCardProps {
+  product: Product;
+}
+
+export default function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isAddingToCart, setIsAddingToCart] = useState(false);

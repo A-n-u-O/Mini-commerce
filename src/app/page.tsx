@@ -11,10 +11,9 @@ export default async function Home() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
-
+  queryKey: ["products", { page: 1 }], // Include page in query key
+  queryFn: () => fetchProducts({ pagination: { page: 1, perPage: 12 } }),
+});
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

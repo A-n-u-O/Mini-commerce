@@ -1,8 +1,8 @@
-import { getProductBySlug } from "@/app/lib/api";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getProductBySlug } from "@/app/lib/api";
 
 const ProductDetail = dynamic(() => import("@/components/ProductDetail"), {
   loading: () => (

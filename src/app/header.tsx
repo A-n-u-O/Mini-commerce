@@ -1,7 +1,6 @@
-// components/Header.tsx
 'use client'
 import Link from "next/link";
-import { ShoppingCart, User, Menu } from "lucide-react";
+import { ShoppingCart, Menu } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 import { useState } from "react";
 
