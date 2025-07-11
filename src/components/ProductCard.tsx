@@ -3,7 +3,7 @@ import { Product } from "@/app/lib/types";
 import { useCartStore } from "@/store/cart-store";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Heart, Eye } from "lucide-react";
+import { ShoppingCart, Heart, Eye, Star } from "lucide-react";
 import { useState } from "react";
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -32,9 +32,9 @@ export default function ProductCard({ product }: { product: Product }) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     setIsAddingToCart(true);
-    
+
     // Simulate async operation for better UX
     setTimeout(() => {
       addItem(product);
@@ -55,12 +55,11 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* Wishlist Button */}
       <button
         onClick={handleLike}
-        className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 flex items-center justify-center transition-all duration-200 hover:bg-white hover:scale-110"
-      >
-        <Heart 
+        className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 flex items-center justify-center transition-all duration-200 hover:bg-white hover:scale-110">
+        <Heart
           className={`h-5 w-5 transition-colors ${
             isLiked ? "text-red-500 fill-red-500" : "text-gray-400"
-          }`} 
+          }`}
         />
       </button>
 
@@ -72,7 +71,7 @@ export default function ProductCard({ product }: { product: Product }) {
               <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
             </div>
           )}
-          
+
           <Image
             src={imageUrl}
             alt={product.name}
@@ -87,7 +86,7 @@ export default function ProductCard({ product }: { product: Product }) {
               setIsImageLoading(false);
             }}
           />
-          
+
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <div className="bg-white rounded-full p-3 transform scale-0 group-hover:scale-100 transition-transform duration-300">
@@ -95,15 +94,43 @@ export default function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
         </div>
-
         {/* Content */}
         <div className="p-4">
           <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 text-sm leading-tight">
             {product.name}
           </h3>
-          <p className="text-lg font-bold text-gray-900 mb-3">
-            ${product.price.toFixed(2)}
-          </p>
+          <div className="flex justify-between items-center mb-2">
+            <p className="text-lg font-bold text-gray-900">
+              ${(product.price / 100).toFixed(2)}
+            </p>
+            {product.stock > 0 ? (
+              <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                In Stock
+              </span>
+            ) : (
+              <span className="text-xs text-red-600 bg-red-50 px-2 py-1 rounded-full">
+                Out of Stock
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`h-3 w-3 ${
+                    i < Math.floor(product.rating ?? 0) // Fallback to 0 if rating is undefined
+                      ? "text-yellow-400 fill-yellow-400"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-500">
+              ({product.reviews ?? 0}){" "}
+              {/* Fallback to 0 if reviews is undefined */}
+            </span>
+          </div>
         </div>
       </Link>
 
@@ -116,8 +143,7 @@ export default function ProductCard({ product }: { product: Product }) {
             isAddingToCart
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "bg-black text-white hover:bg-gray-800 active:scale-95"
-          }`}
-        >
+          }`}>
           {isAddingToCart ? (
             <div className="w-4 h-4 border-2 border-gray-400 border-t-gray-600 rounded-full animate-spin"></div>
           ) : (

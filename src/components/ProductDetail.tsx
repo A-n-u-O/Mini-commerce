@@ -161,68 +161,76 @@ export default function ProductDetail({ product }: { product: Product }) {
 
         {/* Product Info */}
         <div className="space-y-6">
-          {/* Header */}
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${
-                      i < 4
-                        ? "text-yellow-400 fill-yellow-400"
-                        : "text-gray-300"
-                    }`}
+          // Update the stock display in ProductDetail
+          <div className="flex items-center gap-4">
+            <p className="text-3xl font-bold text-gray-900">
+              ${formattedPrice}
+            </p>
+            <span
+              className={`px-3 py-1 text-sm font-medium rounded-full ${
+                (product.stock ?? 0) > 0 // Fallback to 0 if stock is undefined
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}>
+              {(product.stock ?? 0) > 0 ? "In Stock" : "Out of Stock"}
+            </span>
+          </div>
+          // Update rating display to handle undefined rating
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`h-4 w-4 ${
+                    i < Math.floor(product.rating ?? 0) // Fallback to 0 if rating is undefined
+                      ? "text-yellow-400 fill-yellow-400"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-sm text-gray-600">
+              ({product.reviews ?? 0} reviews){" "}
+              {/* Fallback to 0 if reviews is undefined */}
+            </span>
+          </div>
+          // Add color and size options if they exist
+          {product.colorOptions && product.colorOptions.length > 1 && (
+            <div className="space-y-2">
+              <span className="text-sm font-medium text-gray-700">Colors:</span>
+              <div className="flex gap-2">
+                {product.colorOptions.map((color) => (
+                  <button
+                    key={color}
+                    className="w-8 h-8 rounded-full border-2 border-gray-200 hover:border-gray-400"
+                    style={{
+                      backgroundColor:
+                        color === "black"
+                          ? "#000"
+                          : color === "white"
+                            ? "#fff"
+                            : color,
+                    }}
+                    title={color}
                   />
                 ))}
               </div>
-              <span className="text-sm text-gray-600">(128 reviews)</span>
             </div>
-
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-              {product.name}
-            </h1>
-
-            <div className="flex items-center gap-4">
-              <p className="text-3xl font-bold text-gray-900">
-                ${formattedPrice}
-              </p>
-              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                In Stock
-              </span>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="prose prose-sm max-w-none">
-            <p className="text-gray-600 leading-relaxed">
-              {product.description ||
-                "Premium quality product crafted with attention to detail. Perfect for those who appreciate excellence and style."}
-            </p>
-          </div>
-
-          {/* Quantity Selector */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-medium text-gray-700">
-                Quantity:
-              </span>
-              <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2 hover:bg-gray-100 transition-colors">
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="px-4 py-2 font-medium">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="p-2 hover:bg-gray-100 transition-colors">
-                  <Plus className="h-4 w-4" />
-                </button>
+          )}
+          {product.sizeOptions && product.sizeOptions.length > 1 && (
+            <div className="space-y-2">
+              <span className="text-sm font-medium text-gray-700">Sizes:</span>
+              <div className="flex gap-2">
+                {product.sizeOptions.map((size) => (
+                  <button
+                    key={size}
+                    className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-100">
+                    {size}
+                  </button>
+                ))}
               </div>
             </div>
-          </div>
-
+          )}
           {/* Action Buttons */}
           <div className="space-y-3">
             <button
@@ -263,7 +271,6 @@ export default function ProductDetail({ product }: { product: Product }) {
               </button>
             </div>
           </div>
-
           {/* Features */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
             <div className="flex items-center gap-3">
@@ -302,7 +309,6 @@ export default function ProductDetail({ product }: { product: Product }) {
               </div>
             </div>
           </div>
-
           {/* Back Button */}
           <div className="pt-6 border-t border-gray-200">
             <button

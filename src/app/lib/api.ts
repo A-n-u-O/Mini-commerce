@@ -1,53 +1,68 @@
 import { Product } from "./types";
 import productsData from "@/../public/data/products.json";
 
-//  Helper function to validate image paths
-const validateImagePaths = (products: Product[]): Product[] => {
-  return products.map(product => ({...product,
-    // Check if image exists in public folder
-    image: product.image?.startsWith("/")
-      ? product.image
-      : "/images/placeholder.jpg"
-  }));
-};
-
-export const fetchProducts = async (): Promise<Product[]> => {
-  //in production, return directly imported data
-  if (process.env.NODE_ENV !== "development") {
-    return validateImagePaths(productsData);
-  }
-
-  //in development to fetch api
-  try {
-    const dataResponse = await fetch("/data/products.json");
-    if (!dataResponse.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    const data = await dataResponse.json();
-    return validateImagePaths(data);
-  } catch {
-    return validateImagePaths(productsData); //if fetch fails
-  }
-};
-
-//for client components
-export const fetchProductsClient = async (): Promise<Product[]> => {
-  const dataResponse = await fetch("/data/products.json");
-  if (!dataResponse.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  const data = await dataResponse.json();
-
-  // error handling for client side
-  return data.map((product: Product) => ({
+// Helper function to validate and complete product data
+const completeProductData = (products: Product[]): Product[] => {
+  return products.map(product => ({
     ...product,
-    image: product.image || "/images/placeholder.jpg",
+    images: product.images || [],
+    description: product.description || '',
+    category: product.category || 'uncategorized',
+    stock: product.stock ?? 10, // Default stock
+    tags: product.tags || [],
+    rating: product.rating ?? 0, // Default rating
+    reviews: product.reviews ?? 0,
+    colorOptions: product.colorOptions || ['default'],
+    sizeOptions: product.sizeOptions || ['standard']
   }));
 };
 
-export const getProductBySlug = async (
-  slug: string
-): Promise<Product | undefined> => {
-  const products = await fetchProducts();
-  return products.find((product) => product.slug === slug);
+export const fetchProductsClient = async (options?: {
+  query?: string;
+  filters?: {
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    inStock?: boolean;
+  }
+}): Promise<Product[]> => {
+  try {
+    // In a real app, this would be an API call
+    let products = completeProductData(productsData);
+
+    // Apply search query
+    if (options?.query) {
+      const query = options.query.toLowerCase();
+      products = products.filter(product =>
+        product.name.toLowerCase().includes(query) ||
+        product.description?.toLowerCase().includes(query) || // Make description optional
+        product.category?.toLowerCase().includes(query) || // Make category optional
+        (product.tags && product.tags.some(tag => tag.toLowerCase().includes(query))) // Safe tags check
+      );
+    }
+
+    // Apply filters
+    if (options?.filters) {
+      const { category, minPrice, maxPrice, inStock } = options.filters;
+      
+      if (category && category !== 'all') {
+        products = products.filter(p => p.category === category);
+      }
+      if (minPrice) {
+        products = products.filter(p => p.price >= minPrice);
+      }
+      if (maxPrice) {
+        products = products.filter(p => p.price <= maxPrice);
+      }
+      if (inStock) {
+        products = products.filter(p => (p.stock ?? 0) > 0); // Safe stock check
+      }
+    }
+
+    return products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
 };

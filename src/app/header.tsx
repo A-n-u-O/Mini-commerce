@@ -1,6 +1,7 @@
+// components/Header.tsx
 'use client'
 import Link from "next/link";
-import { ShoppingCart, Search, User, Menu } from "lucide-react";
+import { ShoppingCart, User, Menu } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 import { useState } from "react";
 
@@ -10,17 +11,17 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    const headerHeight = 64; // Your header height in pixels
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-    window.scrollTo({
-      top: elementPosition - headerHeight,
-      behavior: 'smooth'
-    });
-  }
-  setIsMenuOpen(false);
-};
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 64;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - headerHeight,
+        behavior: 'smooth'
+      });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
@@ -56,21 +57,6 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            {/* Search Button */}
-            <button
-              className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all duration-200"
-              aria-label="Search"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-
-            {/* User Account */}
-            <button
-              className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all duration-200 hidden sm:block"
-              aria-label="Account"
-            >
-              <User className="h-5 w-5" />
-            </button>
 
             {/* Shopping Cart */}
             <Link
@@ -106,12 +92,6 @@ export default function Header() {
                 className="text-gray-700 hover:text-gray-900 transition-colors font-medium text-left"
               >
                 Products
-              </button>
-              <button
-                onClick={() => scrollToSection('features')}
-                className="text-gray-700 hover:text-gray-900 transition-colors font-medium text-left"
-              >
-                About
               </button>
               <Link
                 href="/account"
