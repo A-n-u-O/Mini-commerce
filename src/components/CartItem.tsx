@@ -31,8 +31,8 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
   };
 
   return (
-    <div className="p-6 hover:bg-gray-50 transition-colors">
-      <div className="flex items-center gap-4">
+    <div className="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         {/* Product Image */}
         <div className="flex-shrink-0">
           <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
@@ -48,24 +48,24 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
 
         {/* Product Details */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <h3 className="text-lg font-semibold text-gray-900 mb-1">
                 <Link href={`/product/${item.id}`} className="hover:text-blue-600 transition-colors">
                   {item.name}
                 </Link>
               </h3>
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-gray-600 mb-3">
                 ${item.price.toFixed(2)} each
               </p>
               
               {/* Quantity Controls */}
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-gray-700">Quantity:</span>
+              <div className="flex items-center gap-3 mb-3 sm:mb-0">
+                <span className="text-sm font-medium text-gray-700">Qty:</span>
                 <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                   <button
                     onClick={decrementQuantity}
-                    className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-800"
+                    className="px-2 sm:px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-800 text-sm"
                     disabled={item.quantity <= 1}
                   >
                     -
@@ -74,12 +74,12 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
                     type="number"
                     value={item.quantity}
                     onChange={handleQuantityChange}
-                    className="w-16 text-center border-0 focus:ring-0 focus:outline-none py-1"
+                    className="w-12 sm:w-16 text-center border-0 focus:ring-0 focus:outline-none py-1 text-sm"
                     min="1"
                   />
                   <button
                     onClick={incrementQuantity}
-                    className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-800"
+                    className="px-2 sm:px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-800 text-sm"
                   >
                     +
                   </button>
@@ -88,9 +88,9 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
             </div>
 
             {/* Price and Remove */}
-            <div className="flex flex-col items-end gap-2 ml-4">
-              <div className="text-right">
-                <p className="text-xl font-bold text-gray-900">
+            <div className="flex flex-row sm:flex-col justify-between sm:items-end gap-2 sm:ml-4">
+              <div className="text-left sm:text-right">
+                <p className="text-lg sm:text-xl font-bold text-gray-900">
                   ${(item.price * item.quantity).toFixed(2)}
                 </p>
                 {item.quantity > 1 && (
@@ -103,7 +103,7 @@ export default function CartItem({ item, onRemove, onQuantityChange }: CartItemP
                 variant="ghost"
                 size="sm"
                 onClick={onRemove}
-                className="text-red-600 hover:text-red-800 hover:bg-red-50 p-2"
+                className="text-red-600 hover:text-red-800 hover:bg-red-50 p-2 self-start sm:self-end"
               >
                 <TrashIcon className="h-4 w-4" />
               </Button>

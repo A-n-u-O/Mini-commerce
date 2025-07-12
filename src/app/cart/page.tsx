@@ -13,14 +13,16 @@ export default function CartPage() {
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-lg shadow-sm border p-8 text-center">
+            <div className="bg-white rounded-lg shadow-sm border p-6 sm:p-8 text-center">
               <div className="mb-6">
-                <ShoppingCartIcon className="h-20 w-20 mx-auto text-gray-300" />
+                <ShoppingCartIcon className="h-16 w-16 sm:h-20 sm:w-20 mx-auto text-gray-300" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">Your Cart</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                Your Cart
+              </h1>
               <p className="text-gray-600 mb-8">Your cart is empty</p>
               <Link href="/">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 rounded-lg font-medium transition-colors">
                   Continue Shopping
                 </Button>
               </Link>
@@ -33,16 +35,18 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
-          
-          <div className="grid lg:grid-cols-3 gap-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
+            Shopping Cart
+          </h1>
+         
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
-              <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-6 border-b border-gray-200">
-                  <h2 className="text-lg font-semibold text-gray-900">
+              <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                <div className="p-4 sm:p-6 border-b border-gray-200">
+                  <h2 className="text-base sm:text-lg font-semibold text-gray-900">
                     Cart Items ({items.length})
                   </h2>
                 </div>
@@ -57,11 +61,15 @@ export default function CartPage() {
                   ))}
                 </div>
               </div>
-              
-              <div className="flex justify-between items-center">
+             
+              <div className="flex justify-between items-center pt-4">
                 <Link href="/">
-                  <Button variant="outline" className="px-6 py-3 rounded-lg font-medium">
-                    ← Continue Shopping
+                  <Button 
+                    variant="outline" 
+                    className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium text-sm sm:text-base"
+                  >
+                    <span className="hidden sm:inline">← Continue Shopping</span>
+                    <span className="sm:hidden">← Shop</span>
                   </Button>
                 </Link>
               </div>
@@ -69,7 +77,7 @@ export default function CartPage() {
 
             {/* Cart Summary */}
             <div className="lg:col-span-1">
-              <div className="sticky top-4">
+              <div className="lg:sticky lg:top-4">
                 <CartSummary items={items} />
               </div>
             </div>
