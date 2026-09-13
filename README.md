@@ -1,70 +1,80 @@
 # Mini-Commerce
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://mini-commerce-liart.vercel.app/)
-![Test Status](https://img.shields.io/badge/tests-3%20passed-brightgreen)
-![Coverage](https://img.shields.io/badge/coverage-85%25-yellow)
+A responsive e-commerce application built with Next.js and TypeScript, focused on product discovery, state management, and a smooth shopping experience.
 
-A lightweight e-commerce prototype built with Next.js 14 (App Router) featuring product browsing, cart management, and mock checkout.
+## Overview
 
-![Mini-Commerce Screenshot](/public/Mini-commerce.png)
+Mini-Commerce was built as a modern frontend application using the Next.js App Router.
+
+The project focuses on:
+
+- reusable component architecture
+- product data handling
+- client and server state management
+- responsive layouts
+- clean shopping flows
+- maintainable TypeScript structure
 
 ## Features
 
-### Core Requirements
-
-- **Product Catalogue** - Browse 8+ products with images, prices, and descriptions
-- **Product Details** - Full view with "Add to Cart" functionality
-- **Persistent Cart** - Manage quantities with Zustand + localStorage
-- **Checkout Flow** - Order summary → Confirmation with random order ID
-
-### Enhancements
-
-- ✨ Dark/Light mode toggle
-- 🔍 Product search functionality
-- 🛒 Toast notifications for cart actions
-- 💅 Framer Motion animations
-- 📱 Fully responsive design
+- Product listing
+- Product detail views
+- Responsive design
+- Shopping cart functionality
+- Shared state management
+- Asynchronous data fetching
+- Loading and error states
+- Reusable UI components
 
 ## Tech Stack
 
-**Mandatory Stack**
-
-- Next.js 14 (App Router)
-- React 18
-- TypeScript (strict mode)
+### Frontend
+- Next.js
+- React
+- TypeScript
 - Tailwind CSS
-- Zustand (state management)
-- React Query (data fetching)
 
-**Testing**
+### State & Data
+- Zustand
+- React Query
 
-- Jest
-- React Testing Library
-- Playwright (e2e)
+### Tools
+- Git
+- GitHub
+- Vercel
 
-## Design Approach
+## Key Engineering Work
 
-### Layout & Responsiveness
+This project involved:
 
-| Breakpoint | Layout        | Features                     |
-| ---------- | ------------- | ---------------------------- |
-| Mobile     | Single column | Sticky header, compact cards |
-| Tablet     | 2-column grid | Larger product images        |
-| Desktop    | 3-column grid | Sidebar cart summary         |
+- Working with the Next.js App Router
+- Managing shared application state with Zustand
+- Handling asynchronous data with React Query
+- Building reusable product components
+- Managing cart interactions
+- Structuring a TypeScript-based frontend project
+- Building responsive layouts across screen sizes
 
-### Color System
+## Live Demo
 
-```js
-{
-  light: {
-    primary: '#4f46e5', // Indigo-600
-    background: '#ffffff',
-    text: '#111827' // Gray-900
-  },
-  dark: {
-    primary: '#6366f1', // Indigo-500
-    background: '#111827',
-    text: '#f3f4f6' // Gray-100
-  }
-}
-```
+[View Live Application](https://mini-commerce-liart.vercel.app/)
+
+## What I Learned
+
+This project strengthened my understanding of:
+
+- Next.js application structure
+- TypeScript in production-style React applications
+- state management
+- server-state handling
+- reusable component design
+- e-commerce UI patterns
+- responsive frontend development
+
+## Author
+
+**Anuoluwapo Victor**
+
+- Portfolio: https://anuvictor.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/a-n-u-o/
+- GitHub: https://github.com/A-n-u-O
